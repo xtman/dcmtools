@@ -18,17 +18,17 @@ import java.util.TreeSet;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.dcm4che3.data.Attributes;
 import org.dcm4che3.data.Tag;
 import org.dcm4che3.data.UID;
 import org.dcm4che3.io.ContentHandlerAdapter;
 import org.dcm4che3.io.DicomInputStream;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class DicomFiles extends TreeSet<DicomFileInfo> {
 
-    private static Logger logger = LoggerFactory.getLogger(DicomFiles.class);
+    private static Logger logger = LogManager.getLogger(DicomFiles.class);
 
     private static final long serialVersionUID = -2990819678387165831L;
 

@@ -12,6 +12,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.dcm4che3.data.Attributes;
 import org.dcm4che3.data.Tag;
 import org.dcm4che3.data.UID;
@@ -35,8 +37,6 @@ import org.dcm4che3.net.pdu.CommonExtendedNegotiation;
 import org.dcm4che3.net.pdu.PresentationContext;
 import org.dcm4che3.net.pdu.UserIdentityRQ;
 import org.dcm4che3.util.TagUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import dcmtools.util.DicomFileInfo;
 import dcmtools.util.DicomFiles;
@@ -63,7 +63,7 @@ public class StoreSCU {
 
     public static final String DEFAULT_TRUST_STORE_PASS = "storescu";
 
-    private static final Logger logger = LoggerFactory.getLogger(StoreSCU.class);
+    private static final Logger logger = LogManager.getLogger(StoreSCU.class);
 
     public static interface DimseRSPHandlerFactory {
         DimseRSPHandler createDimseRSPHandler(Association as, Path f, ProgressMonitor progressMonitor);
