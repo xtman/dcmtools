@@ -21,8 +21,8 @@ import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 import picocli.CommandLine.Spec;
 
-@Command(name = "storescu", abbreviateSynopsis = true, usageHelpWidth = 120, synopsisHeading = "\nUSAGE\n  ", customSynopsis = {
-		"storescu [OPTIONS] -c <title@host:port> DICOM_FILES..." }, descriptionHeading = "\nDESCRIPTION\n  ", description = "Store SCU client.", parameterListHeading = "\nPARAMETERS\n", optionListHeading = "\nOPTIONS\n", sortOptions = false, version = StoreSCUCommand.VERSION, separator = " ")
+@Command(name = "storescu", abbreviateSynopsis = true, usageHelpWidth = 120, synopsisHeading = "\nUSAGE:\n  ", customSynopsis = {
+		"storescu [OPTIONS] -c <title@host:port> DICOM_FILES..." }, descriptionHeading = "\nDESCRIPTION:\n  ", description = "Store SCU client.", parameterListHeading = "\nPARAMETERS:\n", optionListHeading = "\nOPTIONS:\n", sortOptions = false, version = StoreSCUCommand.VERSION, separator = " ")
 public class StoreSCUCommand implements Callable<Integer> {
 
 	public static final String VERSION = "1.0.0";

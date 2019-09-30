@@ -13,7 +13,7 @@ import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 import picocli.CommandLine.Spec;
 
-@Command(name = "dcmtidy", abbreviateSynopsis = true, usageHelpWidth = 120, synopsisHeading = "\nUSAGE\n  ", descriptionHeading = "\nDESCRIPTION\n  ", description = "Re-organize the DICOM files in the source directory.", parameterListHeading = "\nPARAMETERS\n", optionListHeading = "\nOPTIONS\n", sortOptions = false, version = DicomTidyCommand.VERSION, separator = " ")
+@Command(name = "dcmtidy", abbreviateSynopsis = true, usageHelpWidth = 120, synopsisHeading = "\nUSAGE:\n  ", descriptionHeading = "\nDESCRIPTION:\n  ", description = "Re-organize the DICOM files in the source directory.", parameterListHeading = "\nPARAMETERS:\n", optionListHeading = "\nOPTIONS:\n", sortOptions = false, version = DicomTidyCommand.VERSION, separator = " ")
 public class DicomTidyCommand implements Callable<Integer> {
 
     public static final String VERSION = "1.0.0";
