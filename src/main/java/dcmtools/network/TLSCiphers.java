@@ -1,6 +1,6 @@
 package dcmtools.network;
 
-import dcmtools.cli.converters.StringArrayConverter;
+import dcmtools.picocli.converters.StringArrayConverter;
 
 public class TLSCiphers {
 

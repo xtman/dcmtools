@@ -4,7 +4,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.concurrent.Callable;
 
-import dcmtools.DicomTidy;
+import dcmtools.data.DicomTidy;
 import dcmtools.util.DicomFilePathPattern;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;

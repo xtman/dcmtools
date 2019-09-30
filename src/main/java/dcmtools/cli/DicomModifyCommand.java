@@ -4,8 +4,8 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-import dcmtools.DicomModify;
 import dcmtools.data.AttributeSpec;
+import dcmtools.data.DicomModify;
 import dcmtools.util.DicomFiles;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;

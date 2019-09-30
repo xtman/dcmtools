@@ -1,4 +1,4 @@
-package dcmtools.cli.converters;
+package dcmtools.picocli.converters;
 
 import java.text.ParseException;
 

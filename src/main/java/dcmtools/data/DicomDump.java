@@ -1,4 +1,4 @@
-package dcmtools;
+package dcmtools.data;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;

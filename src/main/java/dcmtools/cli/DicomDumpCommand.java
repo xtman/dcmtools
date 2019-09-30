@@ -3,7 +3,7 @@ package dcmtools.cli;
 import java.nio.file.Path;
 import java.util.concurrent.Callable;
 
-import dcmtools.DicomDump;
+import dcmtools.data.DicomDump;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Model.CommandSpec;

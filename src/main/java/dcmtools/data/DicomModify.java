@@ -1,4 +1,4 @@
-package dcmtools;
+package dcmtools.data;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -21,7 +21,6 @@ import org.dcm4che3.io.DicomInputStream;
 import org.dcm4che3.io.DicomOutputStream;
 import org.dcm4che3.util.TagUtils;
 
-import dcmtools.data.AttributeSpec;
 import dcmtools.util.DicomFileInfo;
 import dcmtools.util.DicomFiles;
 
