@@ -50,7 +50,7 @@ public class DicomTidy {
 			} else {
 				logger.info("moving '" + srcDicomFile + "' to '" + dstDicomFile + "'");
 				Path dstParentDir = dstDicomFile.getParent();
-				if (!Files.exists(dstParentDir)) {
+				if (dstParentDir != null && !Files.exists(dstParentDir)) {
 					Files.createDirectories(dstParentDir);
 				}
 				Files.move(srcDicomFile, dstDicomFile);

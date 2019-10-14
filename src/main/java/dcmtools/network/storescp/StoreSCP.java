@@ -193,7 +193,7 @@ public class StoreSCP {
 	}
 
 	private static String[] toUIDs(String s) {
-		s.trim();
+		s = s.trim();
 		if (s.equals("*")) {
 			return new String[] { "*" };
 		}
@@ -207,7 +207,7 @@ public class StoreSCP {
 	private void storeTo(Association as, Attributes fmi, PDVInputStream data, Path file) throws IOException {
 		logger.info("{}: M-WRITE {}", as, file);
 		Path dir = file.getParent();
-		if (!Files.exists(dir)) {
+		if (dir != null && !Files.exists(dir)) {
 			Files.createDirectories(dir);
 		}
 		try (DicomOutputStream out = new DicomOutputStream(Files.newOutputStream(file), UID.ExplicitVRLittleEndian)) {
@@ -220,7 +220,7 @@ public class StoreSCP {
 	private static void moveTo(Association as, Path fromFile, Path toFile) throws IOException {
 		logger.info("{}: M-RENAME {} to {}", as, fromFile, toFile);
 		Path toDir = toFile.getParent();
-		if (!Files.exists(toDir)) {
+		if (toDir != null && !Files.exists(toDir)) {
 			Files.createDirectories(toDir);
 		}
 		Files.move(fromFile, toFile, StandardCopyOption.REPLACE_EXISTING);

@@ -40,11 +40,12 @@ public class DicomModify {
 	public static void updateDicomFile(Path dicomFile, boolean backup, Attributes fmiUpdate, List<int[]> fmiRemove,
 			Attributes dsUpdate, List<int[]> dsRemove) throws IOException {
 		Path dir = dicomFile.getParent();
-		Path dstDicomFile = Files.createTempFile(dir, dicomFile.getFileName().toString(), ".tmp");
+		String dicomFileName = dicomFile.toFile().getName();
+		Path dstDicomFile = Files.createTempFile(dir, dicomFileName, ".tmp");
 		logger.info("updating DICOM file: " + dicomFile);
 		updateDicomFile(dicomFile, dstDicomFile, fmiUpdate, fmiRemove, dsUpdate, dsRemove);
 		if (backup) {
-			Path backupFile = Paths.get(dir.toString(), dicomFile.getFileName().toString() + ".bak");
+			Path backupFile = Paths.get(dir.toString(), dicomFileName + ".bak");
 			Files.move(dicomFile, backupFile, StandardCopyOption.REPLACE_EXISTING);
 		}
 		Files.move(dstDicomFile, dicomFile, StandardCopyOption.REPLACE_EXISTING);
@@ -75,11 +76,12 @@ public class DicomModify {
 	public static void updateDicomFile(Path dicomFile, boolean backup, List<AttributeSpec> update,
 			List<AttributeSpec> remove) throws IOException {
 		Path dir = dicomFile.getParent();
-		Path dstDicomFile = Files.createTempFile(dir, dicomFile.getFileName().toString(), ".tmp");
+		String dicomFileName = dicomFile.toFile().getName();
+		Path dstDicomFile = Files.createTempFile(dir, dicomFileName, ".tmp");
 		logger.info("updating DICOM file: " + dicomFile);
 		updateDicomFile(dicomFile, dstDicomFile, update, remove);
 		if (backup) {
-			Path backupFile = Paths.get(dir.toString(), dicomFile.getFileName().toString() + ".bak");
+			Path backupFile = Paths.get(dir.toString(), dicomFileName + ".bak");
 			Files.move(dicomFile, backupFile, StandardCopyOption.REPLACE_EXISTING);
 		}
 		Files.move(dstDicomFile, dicomFile, StandardCopyOption.REPLACE_EXISTING);
