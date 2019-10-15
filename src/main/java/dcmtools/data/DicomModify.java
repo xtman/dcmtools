@@ -41,7 +41,8 @@ public class DicomModify {
 			Attributes dsUpdate, List<int[]> dsRemove) throws IOException {
 		Path dir = dicomFile.getParent();
 		String dicomFileName = dicomFile.toFile().getName();
-		Path dstDicomFile = Files.createTempFile(dir, dicomFileName, ".tmp");
+		Path dstDicomFile = dir == null ? Files.createFile(Paths.get(dicomFile.toString() + ".tmp"))
+				: Files.createTempFile(dir, dicomFileName, ".tmp");
 		logger.info("updating DICOM file: " + dicomFile);
 		updateDicomFile(dicomFile, dstDicomFile, fmiUpdate, fmiRemove, dsUpdate, dsRemove);
 		if (backup) {
@@ -77,7 +78,8 @@ public class DicomModify {
 			List<AttributeSpec> remove) throws IOException {
 		Path dir = dicomFile.getParent();
 		String dicomFileName = dicomFile.toFile().getName();
-		Path dstDicomFile = Files.createTempFile(dir, dicomFileName, ".tmp");
+		Path dstDicomFile = dir == null ? Files.createFile(Paths.get(dicomFile.toString() + ".tmp"))
+				: Files.createTempFile(dir, dicomFileName, ".tmp");
 		logger.info("updating DICOM file: " + dicomFile);
 		updateDicomFile(dicomFile, dstDicomFile, update, remove);
 		if (backup) {
