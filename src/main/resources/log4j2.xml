@@ -4,7 +4,7 @@
 	<Properties>
 		<Property name="appName">dcmtools</Property>
 		<Property name="logDir">
-			${sys:DCMTOOLS_LOG_DIR}
+			${sys:user.dir}/logs
 		</Property>
 		<Property name="layoutPattern">%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} %t %c %p %m%n
 		</Property>
