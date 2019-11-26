@@ -2,6 +2,7 @@ package dcmtools.data;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -179,8 +180,12 @@ public class DicomDump implements DicomInputHandler {
     }
 
     public static void dump(Path dcmFile) throws IOException {
-        try (DicomInputStream dis = new DicomInputStream(new BufferedInputStream(Files.newInputStream(dcmFile)))) {
+        try (InputStream is = Files.newInputStream(dcmFile);
+                BufferedInputStream bis = new BufferedInputStream(is);
+                DicomInputStream dis = new DicomInputStream(bis)) {
+
             new DicomDump().dump(dis);
+
         }
     }
 
