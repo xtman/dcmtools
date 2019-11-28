@@ -1,6 +1,7 @@
 package dcmtools.siemens.csa;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -8,8 +9,6 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.dcm4che3.io.DicomInputStream;
 
 import dcmtools.io.BinaryInputStream;
 
@@ -153,7 +152,7 @@ public class CSAHeaderInfo implements Iterable<CSAHeaderInfo.Element> {
         return this.elements.get(name);
     }
 
-    public static CSAHeaderInfo read(DicomInputStream in) throws IOException {
+    public static CSAHeaderInfo read(InputStream in) throws IOException {
         try (BinaryInputStream bis = new BinaryInputStream(in, ByteOrder.LITTLE_ENDIAN, false)) {
 
             byte[] b = new byte[4];
