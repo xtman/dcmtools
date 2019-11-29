@@ -16,7 +16,7 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
-@Command(name = "csa2rda", abbreviateSynopsis = true, usageHelpWidth = 120, synopsisHeading = "\nUSAGE:\n  ", descriptionHeading = "\nDESCRIPTION:\n  ", description = "Converts Siemens CSA NON Image DICOM file to Siemens RDA file.", parameterListHeading = "\nPARAMETERS:\n", optionListHeading = "\nOPTIONS:\n", sortOptions = false, version = CSA2RDACommand.VERSION, separator = " ")
+@Command(name = "siemens-csa2rda", abbreviateSynopsis = true, usageHelpWidth = 120, synopsisHeading = "\nUSAGE:\n  ", descriptionHeading = "\nDESCRIPTION:\n  ", description = "Converts Siemens CSA NON Image DICOM file to Siemens RDA file.", parameterListHeading = "\nPARAMETERS:\n", optionListHeading = "\nOPTIONS:\n", sortOptions = false, version = CSA2RDACommand.VERSION, separator = " ")
 public class CSA2RDACommand implements Callable<Integer> {
 
     private static final Logger logger = LogManager.getLogger(CSA2RDACommand.class);
