@@ -391,7 +391,7 @@ public class RawMRMetaData {
         // @formatter:off
         /*
         LoggingUtils.setLogLevel(RawMRMetaData.class, Level.WARN);
-        RawMRMetaData md = parse(Paths.get("/Users/wliu5/Downloads/meas_MID36_EdLineFullKlineXSLAC146V_FID33313.dat"),
+        RawMRMetaData md = parse(Paths.get("/tmp/meas_MID36_EdLineFullKlineXSLAC146V_FID33313.dat"),
                 "Config", "Dicom");
         System.out.println("patient.name: " + md.patientName());
         System.out.println("patient.id: " + md.patientID());
