@@ -7,47 +7,54 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.AbstractMap.SimpleEntry;
+import java.util.Map.Entry;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.dcm4che3.data.Attributes;
-import org.dcm4che3.data.Tag;
 import org.dcm4che3.io.DicomInputStream;
 
-public class RawPETFile {
+public class RawPETCTFile {
 
-    private static final Logger logger = LogManager.getLogger(RawPETFile.class);
+    private static final Logger logger = LogManager.getLogger(RawPETCTFile.class);
 
     public static final int DICOM_PREAMBLE_LENGTH = 132;
 
-    public static Attributes readDicomAttributes(File f) throws IOException {
+    public static final int DATA_TAG = 0x7fe11010;
+
+    public static Entry<Long, Attributes> readDicomAttributes(File f) throws IOException {
         return readDicomAttributes(f.toPath());
     }
 
-    public static Attributes readDicomAttributes(Path f) throws IOException {
+    public static Entry<Long, Attributes> readDicomAttributes(Path f) throws IOException {
         long length = Files.size(f);
         if (length < DICOM_PREAMBLE_LENGTH) {
             throw new IOException("File: '" + f + "' does not contain DICOM preamble (132 bytes).");
         }
         try (InputStream is = Files.newInputStream(f); BufferedInputStream bis = new BufferedInputStream(is)) {
-            Buffer buffer = new Buffer();
-            long offset = 0;
-            while (!buffer.isPreamble()) {
-                int v = bis.read();
-                if (v == -1) {
-                    throw new EOFException("DICOM header is not found in file: '" + f + "'");
-                }
-                buffer.put((byte) v);
-                offset++;
-            }
-            logger.debug(String.format("Found DICOM preamble at offset: %08XH", (offset - DICOM_PREAMBLE_LENGTH)));
+            long offset = seekToDicomAttributes(bis);
             try (DicomInputStream dis = new DicomInputStream(bis)) {
                 Attributes attrs = dis.readFileMetaInformation();
-                dis.readAttributes(attrs, -1, 0x7fe11010);
-                return attrs;
+                dis.readAttributes(attrs, -1, DATA_TAG);
+                return new SimpleEntry<Long, Attributes>(offset, attrs);
             }
         }
+    }
+
+    public static long seekToDicomAttributes(InputStream in) throws IOException {
+        Buffer buffer = new Buffer();
+        long offset = 0;
+        while (!buffer.isPreamble()) {
+            int v = in.read();
+            if (v == -1) {
+                throw new EOFException("DICOM header is not found.");
+            }
+            buffer.put((byte) v);
+            offset++;
+        }
+        logger.debug(String.format("Found DICOM preamble at offset: %08XH", (offset - DICOM_PREAMBLE_LENGTH)));
+        return offset;
     }
 
     public static Attributes getDicomAttributes(File f) {
@@ -56,7 +63,7 @@ public class RawPETFile {
 
     public static Attributes getDicomAttributes(Path f) {
         try {
-            return readDicomAttributes(f);
+            return readDicomAttributes(f).getValue();
         } catch (Throwable e) {
             logger.debug("Failed to read DICOM attributes from file: '" + f + "'", e);
             return null;
@@ -109,13 +116,11 @@ public class RawPETFile {
     public static void main(String[] args) throws IOException {
         // @formatter:off
         /*
-        Path f1 = Paths.get(
-                "/tmp/Jay_Adams.PT.PET_tbi_nav4694_50_70_(Adult).602.PET_COUNTRATE.2019.07.29.16.03.20.924000.2.0.5828969.ptd");
-        Path f2 = Paths.get(
-                "/tmp/Jay_Adams.PT.PET_tbi_nav4694_50_70_(Adult).602.PETCT_SPL.2019.07.29.16.03.20.919000.2.0.5828919.ptd");
-        Attributes attrs1 = readDicomAttributes(f1);
+        Path f1 = Paths.get("/tmp/1.ptd");
+        Path f2 = Paths.get("/tmp/2.ptd");
+        Attributes attrs1 = getDicomAttributes(f1);
         System.out.println(attrs1.getString(Tag.StudyDate));
-        Attributes attrs2 = readDicomAttributes(f2);
+        Attributes attrs2 = getDicomAttributes(f2);
         System.out.println(attrs2.getString(Tag.StudyDate));
         */
         // @formatter:on

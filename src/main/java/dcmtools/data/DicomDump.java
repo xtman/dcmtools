@@ -23,6 +23,8 @@ public class DicomDump implements DicomInputHandler {
 
     public static final int MAX_VALUE_LENGTH = 128;
 
+    private long _offset = 0L;
+
     @Override
     public void startDataset(DicomInputStream dis) throws IOException {
         printPreamble(dis.getPreamble());
@@ -114,7 +116,7 @@ public class DicomDump implements DicomInputHandler {
     }
 
     private void appendOffset(DicomInputStream dis, StringBuilder line) {
-        appendOffset(dis.getTagPosition(), line);
+        appendOffset(_offset + dis.getTagPosition(), line);
     }
 
     private void appendTag(DicomInputStream dis, StringBuilder line) {
@@ -174,9 +176,22 @@ public class DicomDump implements DicomInputHandler {
         System.out.println(line);
     }
 
-    public void dump(DicomInputStream dis) throws IOException {
+    public void dump(long offset, DicomInputStream dis, int stopTag) throws IOException {
+        _offset = offset;
         dis.setDicomInputHandler(this);
-        dis.readDataset(-1, -1);
+        dis.readDataset(-1, stopTag);
+    }
+
+    public void dump(long offset, DicomInputStream dis) throws IOException {
+        dump(offset, dis, -1);
+    }
+
+    public void dump(DicomInputStream dis, int stopTag) throws IOException {
+        dump(0L, dis, stopTag);
+    }
+
+    public void dump(DicomInputStream dis) throws IOException {
+        dump(0L, dis, -1);
     }
 
     public static void dump(Path dcmFile) throws IOException {
