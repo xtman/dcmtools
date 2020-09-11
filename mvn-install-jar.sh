@@ -7,7 +7,7 @@ WD=$(cd $(dirname $0); pwd)
 ARTIFACT_ID=dcmtools
 NAME=dcmtools
 GROUP_ID=io.github.xtman
-POM_FILE=${WD}/mvn-install-jar.pom.xml
+POM_FILE=${WD}/mvn-install-jar.xml
 
 # make sure mvn-install-jar.pom.xml exists
 [[ ! -f ${POM_FILE} ]] && echo "${POM_FILE} not found" 1>&2 && exit 1

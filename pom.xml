@@ -5,7 +5,7 @@
 
 	<groupId>io.github.xtman</groupId>
 	<artifactId>dcmtools</artifactId>
-	<version>0.0.6</version>
+	<version>0.0.7</version>
 	<packaging>jar</packaging>
 
 	<name>dcmtools</name>
@@ -28,7 +28,7 @@
 		<dependency>
 			<groupId>org.dcm4che</groupId>
 			<artifactId>dcm4che-imageio</artifactId>
-			<version>5.19.1</version>
+			<version>5.22.5</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.slf4j</groupId>
@@ -43,7 +43,7 @@
 		<dependency>
 			<groupId>org.dcm4che</groupId>
 			<artifactId>dcm4che-net</artifactId>
-			<version>5.19.1</version>
+			<version>5.22.5</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.slf4j</groupId>

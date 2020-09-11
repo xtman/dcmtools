@@ -239,6 +239,10 @@ public class StoreSCP {
 			_device.setScheduledExecutor(_scheduledExecutor);
 			_device.setExecutor(_executor);
 			_device.bindConnections();
+			System.out.println("Running storageSCP server: " + _options.applicationEntity());
+			System.out.println("    AE Title: " + _options.applicationEntity().title);
+			System.out.println("    Listening Port: " + _options.applicationEntity().port);
+			System.out.println("    Directory: " + _options.directory());
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			e.printStackTrace();

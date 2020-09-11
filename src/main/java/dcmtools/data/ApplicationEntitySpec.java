@@ -20,6 +20,14 @@ public class ApplicationEntitySpec {
         this(title, null, 0);
     }
 
+    public String toString() {
+        if (this.title != null && this.port > 0) {
+            return String.format("%s@%s:%d", this.title, this.host == null ? "localhost" : this.host, this.port);
+        } else {
+            return null;
+        }
+    }
+
     public static class Converter implements ITypeConverter<ApplicationEntitySpec> {
 
         @Override
