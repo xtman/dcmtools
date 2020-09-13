@@ -1,65 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN" monitorInterval="30">
 
-	<Properties>
-		<Property name="appName">dcmtools</Property>
-		<Property name="logDir">
-			${sys:dcmtools.home:-.}/logs
-		</Property>
-		<Property name="layoutPattern">%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} %t %c %p %m%n
-		</Property>
-	</Properties>
+    <Properties>
+        <Property name="appName">${sys:dcmtools.app:-dcmtools}</Property>
+        <Property name="appHome">${sys:dcmtools.home:-.}</Property>
+        <Property name="logType">${sys:dcmtools.log.type:-stdout}</Property>
+        <Property name="logDir">${sys:dcmtools.home:-.}/logs</Property>
+        <Property name="layoutPattern">%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} %t %c %p %m%n
+        </Property>
+    </Properties>
 
-	<Appenders>
+    <Appenders>
 
-		<Console name="Console" target="SYSTEM_OUT" follow="true">
-			<PatternLayout pattern="${layoutPattern}" />
-		</Console>
+        <Console name="stdOut" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${layoutPattern}"/>
+        </Console>
 
-		<RollingFile name="appLog"
-			fileName="${logDir}/${appName}.log"
-			filePattern="${logDir}/${appName}-%d{yyyyMMdd}-%i.log.gz">
-			<LevelRangeFilter minLevel="DEBUG" maxLevel="DEBUG"
-				onMatch="ACCEPT" onMismatch="DENY" />
-			<PatternLayout pattern="${layoutPattern}" />
-			<Policies>
-				<TimeBasedTriggeringPolicy interval="2"
-					modulate="true" />
-				<SizeBasedTriggeringPolicy size="100MB" />
-			</Policies>
-			<DefaultRolloverStrategy max="2" />
-		</RollingFile>
+        <RollingFile name="appLog"
+                     fileName="${logDir}/${appName}.log"
+                     filePattern="${logDir}/${appName}-%d{yyyyMMdd}-%i.log.gz">
+            <LevelRangeFilter minLevel="DEBUG" maxLevel="DEBUG"
+                              onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${layoutPattern}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="2"
+                                           modulate="true"/>
+                <SizeBasedTriggeringPolicy size="100MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="2"/>
+        </RollingFile>
 
-		<RollingFile name="dcm4cheLog"
-			fileName="${logDir}/dcm4che.log"
-			filePattern="${logDir}/dcm4che-%d{yyyyMMdd}-%i.log.gz">
-			<PatternLayout pattern="${layoutPattern}" />
-			<Policies>
-				<TimeBasedTriggeringPolicy interval="2"
-					modulate="true" />
-				<SizeBasedTriggeringPolicy size="100MB" />
-			</Policies>
-			<DefaultRolloverStrategy max="2" />
-		</RollingFile>
+        <Routing name="router">
+            <Routes pattern="${logType}}">
+                <Route ref="stdOut" key="stdout"/>
+                <Route ref="appLog" key="file"/>
+            </Routes>
+        </Routing>
 
-	</Appenders>
+    </Appenders>
 
-	<Loggers>
+    <Loggers>
 
-		<Logger name="dcmtools" additivity="false" level="TRACE">
-			<AppenderRef ref="appLog" />
-			<AppenderRef ref="Console" />
-		</Logger>
+        <Logger name="dcmtools" additivity="false" level="TRACE">
+            <AppenderRef ref="router"/>
+        </Logger>
 
-		<Logger name="org.dcm4che3" additivity="false">
-			<AppenderRef ref="dcm4cheLog" />
-			<AppenderRef ref="Console" />
-		</Logger>
+        <Logger name="org.dcm4che3" additivity="false">
+            <AppenderRef ref="router"/>
+        </Logger>
 
-		<Root level="all">
-			<AppenderRef ref="Console" />
-		</Root>
+        <Root level="all">
+            <AppenderRef ref="router"/>
+        </Root>
 
-	</Loggers>
+    </Loggers>
 
 </Configuration>

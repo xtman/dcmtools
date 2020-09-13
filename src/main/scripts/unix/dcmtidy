@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# ${DCMTOOLS_HOME}/bin/
+BIN=$(dirname ${BASH_SOURCE[0]})
+
+# current directory
+CWD=$(pwd)
+
+# ${DCMTOOLS_HOME}/
+DCMTOOLS_HOME=$(cd ${BIN}/../../ && pwd && cd ${CWD})
+
+# lib directory
+LIB=${DCMTOOLS_HOME}/lib
+
+# JRE included?
+JRE=${DCMTOOLS_HOME}/jre
+if [[ -d ${JRE} ]]; then
+  JAVA=${JRE}/bin/java
+else
+  JAVA=$(which java)
+  [[ -z ${JAVA} ]] && echo "could not find java" && exit 1
+fi
+
+# command
+$JAVA -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:+UseStringDeduplication -Xmx200m -cp "${LIB}/*" dcmtools.cli.DicomTidyCommand ${1+"$@"}

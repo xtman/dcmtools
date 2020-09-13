@@ -32,7 +32,7 @@ public class StoreSCUCommand implements Callable<Integer> {
 	private ApplicationEntitySpec calledAE;
 
 	@Option(names = { "-b",
-			"--calling-ae" }, description = "calling application entity", arity = "1", required = false, paramLabel = "<title[@host:port]>", converter = ApplicationEntitySpec.CallingAEConverter.class)
+			"--calling-ae" }, description = "calling application entity", arity = "1", required = false, paramLabel = "<title[@host:port]>", defaultValue = "STORESCU", converter = ApplicationEntitySpec.CallingAEConverter.class)
 	private ApplicationEntitySpec callingAE = new ApplicationEntitySpec(StoreSCU.DEFAULT_AE_TITLE);
 
 	@Option(names = { "-a",
