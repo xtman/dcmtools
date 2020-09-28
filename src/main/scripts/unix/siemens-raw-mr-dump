@@ -22,4 +22,4 @@ else
 fi
 
 # command
-$JAVA -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:+UseStringDeduplication -Xmx200m -cp "${LIB}/*" dcmtools.siemens.cli.RawMRDumpCommand ${1+"$@"}
+$JAVA -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:+UseStringDeduplication -Xmx200m -cp "$(printf %s: ${LIB}/*.jar)" dcmtools.siemens.cli.RawMRDumpCommand ${1+"$@"}
