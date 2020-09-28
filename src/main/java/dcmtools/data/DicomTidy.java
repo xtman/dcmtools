@@ -1,31 +1,27 @@
 package dcmtools.data;
 
+import dcmtools.util.DicomFilePathPattern;
+import dcmtools.util.DicomFileUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.dcm4che3.data.Attributes;
+import org.dcm4che3.util.AttributesFormat;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Set;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.dcm4che3.data.Attributes;
-import org.dcm4che3.data.Tag;
-import org.dcm4che3.util.AttributesFormat;
-
-import dcmtools.util.DicomFileUtils;
-
 public class DicomTidy {
-
-    public static final String DEFAULT_PATH_PATTERN = String.format("{{%08X}/{%08X}/{%08X}.dcm",
-            Tag.StudyInstanceUID, Tag.SeriesInstanceUID, Tag.SOPInstanceUID);
 
     private static final Logger logger = LogManager.getLogger(DicomTidy.class);
 
-    private AttributesFormat _format;
+    private final AttributesFormat _format;
     private boolean _overwrite = false;
 
     public DicomTidy(String pattern, boolean replaceIfExists) {
-        _format = new AttributesFormat(pattern == null ? DEFAULT_PATH_PATTERN : pattern);
+        _format = new AttributesFormat(pattern == null ? DicomFilePathPattern.DEFAULT_PATTERN : pattern);
         _overwrite = replaceIfExists;
     }
 

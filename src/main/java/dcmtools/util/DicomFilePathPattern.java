@@ -16,12 +16,7 @@ import org.dcm4che3.io.DicomInputStream;
 public class DicomFilePathPattern {
 
     // @formatter:off
-    public static final String DEFAULT_PATTERN = Paths.get(
-                    String.format("{%08X}", Tag.SourceApplicationEntityTitle),
-                    String.format("{%08X}", Tag.PatientID),
-                    String.format("{%08X}", Tag.StudyInstanceUID),
-                    String.format("{%08X}", Tag.SeriesInstanceUID),
-                    String.format("{%08X}.dcm", Tag.SOPInstanceUID)).toString();
+    public static final String DEFAULT_PATTERN = "{0020000D}/{0020000E}/{00080018}.dcm";
     public static final DicomFilePathPattern DEFAULT = new DicomFilePathPattern(DEFAULT_PATTERN);
     // @formatter:on
 

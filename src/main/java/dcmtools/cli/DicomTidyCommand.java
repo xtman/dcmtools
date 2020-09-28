@@ -18,21 +18,21 @@ public class DicomTidyCommand implements Callable<Integer> {
 
     public static final String VERSION = "1.0.0";
 
-    @Option(names = { "-p",
-            "--pattern" }, required = false, description = "the pattern to generate file path at the destination.")
+    @Option(names = {"-p",
+            "--pattern"}, required = false, defaultValue = DicomFilePathPattern.DEFAULT_PATTERN, description = "the pattern to generate file path at the destination.")
     private String pattern = DicomFilePathPattern.DEFAULT_PATTERN;
 
-    @Option(names = { "-o",
-            "--overwrite" }, required = false, description = "overwrite if the file already exists at the destination")
+    @Option(names = {"-o",
+            "--overwrite"}, required = false, description = "overwrite if the file already exists at the destination")
     private boolean overwrite = false;
 
-    @Option(names = { "-h", "--help" }, usageHelp = true, description = "output usage information")
+    @Option(names = {"-h", "--help"}, usageHelp = true, description = "output usage information")
     private boolean printHelp;
 
-    @Option(names = { "-v", "--verbose" }, description = "verbose")
+    @Option(names = {"-v", "--verbose"}, description = "verbose")
     private boolean verbose = false;
 
-    @Option(names = { "--version" }, versionHelp = true, description = "output version information")
+    @Option(names = {"--version"}, versionHelp = true, description = "output version information")
     private boolean printVersion;
 
     @Parameters(description = "source directory contains DICOM files", index = "0", paramLabel = "SRC_DIR")
