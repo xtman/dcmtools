@@ -13,4 +13,4 @@ if exists %JRE% (
     set JAVA=java
 )
 
-%JAVA% -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:+UseStringDeduplication -Xmx200m -cp "%LIB%/*" dcmtools.cli.StoreSCUCommand %*
+%JAVA% -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:+UseStringDeduplication -Xmx200m -cp "%LIB%;%LIB%/*" dcmtools.cli.StoreSCUCommand %*
