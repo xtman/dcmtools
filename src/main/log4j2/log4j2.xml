@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+
+    <Properties>
+        <Property name="consoleLayout">%m%n</Property>
+    </Properties>
+
+    <Appenders>
+
+        <Console name="stdout" target="SYSTEM_OUT" follow="true">
+            <LevelRangeFilter minLevel="WARN" maxLevel="ALL"
+                              onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${consoleLayout}"/>
+        </Console>
+
+        <Console name="stderr" target="SYSTEM_ERR" follow="true">
+            <LevelRangeFilter minLevel="FATAL" maxLevel="ERROR"
+                              onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${consoleLayout}"/>
+        </Console>
+
+    </Appenders>
+
+    <Loggers>
+
+        <Root additivity="false" level="all">
+            <AppenderRef ref="stdout"/>
+            <AppenderRef ref="stderr"/>
+        </Root>
+
+    </Loggers>
+
+</Configuration>

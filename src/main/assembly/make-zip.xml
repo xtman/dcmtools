@@ -15,6 +15,11 @@
     </dependencySets>
     <fileSets>
         <fileSet>
+            <fileMode>0644</fileMode>
+            <directory>src/main/log4j2</directory>
+            <outputDirectory>${project.artifactId}-${project.version}/lib</outputDirectory>
+        </fileSet>
+        <fileSet>
             <fileMode>0755</fileMode>
             <directory>src/main/scripts</directory>
             <outputDirectory>${project.artifactId}-${project.version}/bin</outputDirectory>
